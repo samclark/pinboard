@@ -1,6 +1,6 @@
 {
    "name": "Pinboard",
-   "version": "1.0.8",
+   "version": "1.0.10",
    "description": "A toolbar button for the excellent Pinboard (http://pinboard.in) bookmarking service.",   
    "icons": {
       "128": "icon_128.png"
@@ -11,16 +11,5 @@
       "popup": "popup.html"
    },   
    "options_page": "options.html",
-   "permissions": [ "tabs",
-      "chrome://favicon/",
-      "http://*/*", 
-      "https://*/*"
-   ],
-   "content_scripts": [ 
-      { "matches": ["http://*/*"],
-        "js": ["selection.js"],
-        "run_at": "document_start",
-        "all_frames": true
-      }
-   ]
+   "permissions": [ "tabs" ]
 }

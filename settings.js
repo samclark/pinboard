@@ -39,73 +39,73 @@ function setOptionValue(name, value) {
 }
 
 function getOptionUserName() {
-	return getOptionValue('userName', '');
+	return getOptionValue("userName", "");
 }
 
 function setOptionUserName(value) {
-	return setOptionValue('userName', value);
+	return setOptionValue("userName", value);
 }
 
 function getOptionShowAllBookmarks() {
-	return getOptionValue('showAllBookmarks', 'yes');
+	return getOptionValue("showAllBookmarks", "yes");
 }
 
 function setOptionShowAllBookmarks(value) {
-	return setOptionValue('showAllBookmarks', value);
+	return setOptionValue("showAllBookmarks", value);
 }
 
 function getOptionShowPrivateBookmarks() {
-	return getOptionValue('showPrivateBookmarks', 'no');
+	return getOptionValue("showPrivateBookmarks", "no");
 }
 
 function setOptionShowPrivateBookmarks(value) {
-	return setOptionValue('showPrivateBookmarks', value);
+	return setOptionValue("showPrivateBookmarks", value);
 }
 
 function getOptionShowPublicBookmarks() {
-	return getOptionValue('showPublicBookmarks', 'no');
+	return getOptionValue("showPublicBookmarks", "no");
 }
 
 function setOptionShowPublicBookmarks(value) {
-	return setOptionValue('showPublicBookmarks', value);
+	return setOptionValue("showPublicBookmarks", value);
 }
 
 function getOptionShowUnreadBookmarks() {
-	return getOptionValue('showUnreadBookmarks', 'no');
+	return getOptionValue("showUnreadBookmarks", "no");
 }
 
 function setOptionShowUnreadBookmarks(value) {
-	return setOptionValue('showUnreadBookmarks', value);
+	return setOptionValue("showUnreadBookmarks", value);
 }
 
 function getOptionShowUntaggedBookmarks() {
-	return getOptionValue('showUntaggedBookmarks', 'no');
+	return getOptionValue("showUntaggedBookmarks", "no");
 }
 
 function setOptionShowUntaggedBookmarks(value) {
-	return setOptionValue('showUntaggedBookmarks', value);
+	return setOptionValue("showUntaggedBookmarks", value);
 }
 
 function getOptionShowStarredBookmarks() {
-	return getOptionValue('showStarredBookmarks', 'no');
+	return getOptionValue("showStarredBookmarks", "no");
 }
 
 function setOptionShowStarredBookmarks(value) {
-	return setOptionValue('showStarredBookmarks', value);
+	return setOptionValue("showStarredBookmarks", value);
 }
 
 function getOptionShowSaveBookmark() {
-	return getOptionValue('showSaveBookmark', 'yes');
+	return getOptionValue("showSaveBookmark", "yes");
 }
 
 function setOptionShowSaveBookmark(value) {
-	return setOptionValue('showSaveBookmark', value);
+	return setOptionValue("showSaveBookmark", value);
 }
 
 function getOptionShowReadLater() {
-	return getOptionValue('showReadLater', 'yes');
+	return getOptionValue("showReadLater", "yes");
 }
 
 function setOptionShowReadLater(value) {
-	return setOptionValue('showReadLater', value);
+	return setOptionValue("showReadLater", value);
 }

@@ -8,11 +8,11 @@
 		<script type="text/javascript" src="engine.js"></script>
 		<script type="text/javascript">
 			function addMenuItem(show, name, onClickFunction) {
-				if ('yes' == show) {
-					var parentElement = document.getElementById('body-content');
-					var menuItemElement = document.createElement('div');
-					menuItemElement.setAttribute('class', 'menu-item');
-					menuItemElement.setAttribute('onclick', onClickFunction);
+				if ("yes" == show) {
+					var parentElement = document.getElementById("body-content");
+					var menuItemElement = document.createElement("div");
+					menuItemElement.setAttribute("class", "menu-item");
+					menuItemElement.setAttribute("onclick", onClickFunction);
 					menuItemElement.appendChild(document.createTextNode(name));
 					parentElement.appendChild(menuItemElement);
 				}
@@ -20,29 +20,29 @@
 
 			function isUserNameSet() {
 				var userName = getOptionUserName();
-				return userName && '' != userName;
+				return userName && "" != userName;
 			}
 
 			function addMenuItems() {
 				if (isUserNameSet()) {
-					addMenuItem(getOptionShowAllBookmarks(), 'All Bookmarks', 'openAllBookmarks()');
-					addMenuItem(getOptionShowPrivateBookmarks(), 'Private Bookmarks', 'openPrivateBookmarks()');
-					addMenuItem(getOptionShowPublicBookmarks(), 'Public Bookmarks', 'openPublicBookmarks()');
-					addMenuItem(getOptionShowUnreadBookmarks(), 'Unread Bookmarks', 'openUnreadBookmarks()');
-					addMenuItem(getOptionShowUntaggedBookmarks(), 'Untagged Bookmarks', 'openUntaggedBookmarks()');
-					addMenuItem(getOptionShowStarredBookmarks(), 'Starred Bookmarks', 'openStarredBookmarks()');
-					addMenuItem(getOptionShowSaveBookmark(), 'Save Bookmark', 'saveBookmark()');
-					addMenuItem(getOptionShowReadLater(), 'Read Later', 'readLater()');
+					addMenuItem(getOptionShowAllBookmarks(), "All Bookmarks", "openAllBookmarks()");
+					addMenuItem(getOptionShowPrivateBookmarks(), "Private Bookmarks", "openPrivateBookmarks()");
+					addMenuItem(getOptionShowPublicBookmarks(), "Public Bookmarks", "openPublicBookmarks()");
+					addMenuItem(getOptionShowUnreadBookmarks(), "Unread Bookmarks", "openUnreadBookmarks()");
+					addMenuItem(getOptionShowUntaggedBookmarks(), "Untagged Bookmarks", "openUntaggedBookmarks()");
+					addMenuItem(getOptionShowStarredBookmarks(), "Starred Bookmarks", "openStarredBookmarks()");
+					addMenuItem(getOptionShowSaveBookmark(), "Save Bookmark", "saveBookmark()");
+					addMenuItem(getOptionShowReadLater(), "Read Later", "readLater()");
 				}
 				else {
-					addMenuItem('yes', 'Setup User Name', 'openOptions()');
+					addMenuItem("yes", "Setup User Name", "openOptions()");
 				}
 			}
 		</script>
   	</head>
   	<body onload="addMenuItems()">
-  		<div id='body-content'>
-  			<div class='menu'>
+  		<div id="body-content">
+  			<div class="menu">
   			</div>
   		</div>
 	</body>
