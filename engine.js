@@ -47,13 +47,7 @@ function openStarredBookmarks() {
 
 function saveBookmark() {
     chrome.tabs.getSelected(null , function(tab) {
-        if (tab.url.indexOf("http:") != 0 && tab.url.indexOf("https:") != 0) {
-            window.open("http://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=350");
-        } else {
-            chrome.tabs.sendRequest(tab.id, {method: "getSelection"}, function(response) {
-                window.open("http://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title) + "&description=" + encodeURIComponent(response.data.substr(0, 256)), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=350");
-            });
-        }
+        window.open("http://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=350");
     });
 }
 
