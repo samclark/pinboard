@@ -1,19 +1,20 @@
 {
     "name": "Pinboard",
-    "version": "1.1.0",
-    "description": "A toolbar button for the excellent Pinboard (http://pinboard.in) bookmarking service.",   
+    "version": "1.4",
+    "description": "A toolbar button for the Pinboard bookmarking service (http://pinboard.in).",   
     "icons": {
 		"64": "icon_64.png",
         "128": "icon_128.png" 
     },
 	"background_page": "background.html",
     "browser_action": {
-        "default_icon": "icon_19.png",
+        "default_icon": "icon_19_a.png",
         "default_title": "Pinboard",
 		"default_popup": "popup.html"		
     },   
     "options_page": "options.html",
     "permissions": [ 
-        "tabs"
-    ]
+        "tabs", 
+        "http://*/*"
+    ]    
 }
