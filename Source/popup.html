@@ -111,15 +111,23 @@
                 });
             }
 			
-			function saveBookmark() {
-                chrome.tabs.getSelected(null , function(tab) {
-					var selection = "";
-					if (selection.length > 0)
-						window.open("https://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title) + "&description=" + encodeURIComponent(selection.substr(0, 256)), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=360");
-					else
-						window.open("https://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=360");
-                });
-            }
+            function saveBookmark() {
+                chrome.tabs.getSelected(null, function(tab) {
+                    // Send message to the content script to send us the selected text
+                    chrome.tabs.sendRequest(tab.id, {method: "getSelection"}, function (response) {
+                        var selection = "";
+                        selection = response.data;
+                        var url = "https://pinboard.in/add?jump=close" +
+                                  "&url=" + encodeURIComponent(tab.url) +
+                                  "&title=" + encodeURIComponent(tab.title);
+                        if (selection.length > 0){
+                            url += "&description=" + encodeURIComponent(selection.substr(0, 256));
+                        }
+                        window.open(url, "pinboad.in",
+                                    "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=360");
+                    }); //sendRequest
+                }); //getSelected
+            } //saveBookmark
 
             function readLater() {
                 chrome.tabs.getSelected(null , function(tab) {
