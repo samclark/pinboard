@@ -7,7 +7,9 @@
     "64": "icon_64.png",
     "128": "icon_128.png" 
   },
-  "background": "background.html",
+  "background":{ 
+    "page":"background.html"
+  },
   "browser_action": {
     "default_icon": "icon_19_a.png",
     "default_title": "Pinboard",
