@@ -56,6 +56,7 @@ function showSavedMessage() {
 }
 
 function load() {
+  alert("bla");
   var options = chrome.extension.getBackgroundPage().getOptions();
   setTextValue("user-name", options.userName);
   setCheckboxState("use-https", options.useHttps);
@@ -73,6 +74,4 @@ function save() {
   showSavedMessage();
 }
 
-document.addEventListener('load', function () {
-  window.addEventListener("load", load);
-});
+window.addEventListener('load', load);

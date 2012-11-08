@@ -91,7 +91,5 @@ function readLater() {
   });
 }
 
-document.addEventListener('load', function () {
-  window.addEventListener("load", addMenuItems);
-});
+window.addEventListener('load', addMenuItems);
 
