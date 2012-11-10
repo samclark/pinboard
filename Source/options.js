@@ -1,9 +1,20 @@
+$(document).ready(function() {
+  alert("Hello world!");
+  $(function() {
+    $("#active-menu-items, #inactive-menu-items").sortable({
+      connectWith: ".menu-items"
+    }).disableSelection();
+  });
 
-$(function() {
-  $("#active-menu-items, #inactive-menu-items").sortable({
-    connectWith: ".menu-items"
-  }).disableSelection();
+  $("button").click(function(){
+    save();
+  });
+
+  $("#close_button").click(function(){
+    close();
+  });
 });
+
 
 function getTextValue(elementId) {
   return document.getElementById(elementId).value;
@@ -56,7 +67,6 @@ function showSavedMessage() {
 }
 
 function load() {
-  alert("bla");
   var options = chrome.extension.getBackgroundPage().getOptions();
   setTextValue("user-name", options.userName);
   setCheckboxState("use-https", options.useHttps);

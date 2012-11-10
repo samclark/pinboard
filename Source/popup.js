@@ -4,8 +4,8 @@ function addMenuItem(name, onClickFunction) {
   if (null !== parentElement) {
     var menuItemElement = document.createElement("div");
     menuItemElement.setAttribute("class", "menu-item");
-    menuItemElement.setAttribute("onclick", onClickFunction);
     menuItemElement.appendChild(document.createTextNode(name));
+    menuItemElement.addEventListener("click", onClickFunction);
     parentElement.appendChild(menuItemElement);
   }
 }
@@ -13,12 +13,18 @@ function addMenuItem(name, onClickFunction) {
 function addMenuItems() {
   var options = chrome.extension.getBackgroundPage().getOptions();
   if ("" === options.userName) {
-    addMenuItem("Setup User Name", "openUrl(\"" + chrome.extension.getURL("options.html") + "\"); window.close();");
+    addMenuItem("Setup User Name", function(){
+      openUrl(chrome.extension.getURL("options.html"));
+      window.close();
+    });
   }
   else {
     var len = options.menuItems.length;
     if (0 === len) {
-      addMenuItem("Setup Menu Items", "openUrl(\"" + chrome.extension.getURL("options.html") + "\"); window.close();");
+      addMenuItem("Setup Menu Items", function(){
+        openUrl(chrome.extension.getURL("options.html")); 
+        window.close();
+      });
     }
     else {
       var openMethod = "yes" == options.reuseTabs ? "reopenUrl" : "openUrl";
@@ -91,5 +97,5 @@ function readLater() {
   });
 }
 
-window.addEventListener('load', addMenuItems);
+window.addEventListener('DOMContentLoaded', addMenuItems);
 

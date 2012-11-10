@@ -57,7 +57,6 @@ function setOptionMenuItems(values) {
 }
 
 function getOptions() {
-  alert("getOptions");
   return { userName: getOptionUserName(),
     useHttps: getOptionUseHttps(),
     reuseTabs: getOptionReuseTabs(),
