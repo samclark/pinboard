@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  alert("Hello world!");
   $(function() {
     $("#active-menu-items, #inactive-menu-items").sortable({
       connectWith: ".menu-items"
