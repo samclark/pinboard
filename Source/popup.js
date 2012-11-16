@@ -30,37 +30,48 @@ function addMenuItems() {
       var openMethod = "yes" == options.reuseTabs ? "reopenUrl" : "openUrl";
       var protocol = "yes" == options.useHttps ? "https://" : "http://";
       var allMenuItems = chrome.extension.getBackgroundPage().getAllMenuItems();
+      var baseUrl = protocol + "pinboard.in/u:";
       for (var i=0; i<len; ++i) {
         var menuItem = options.menuItems[i];
         if ("allBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/u:" + options.userName + "/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,baseUrl + options.userName + "/"));
         } else if ("privateBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/u:" + options.userName + "/private/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,baseUrl + options.userName + "/private"));
         } else if ("publicBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/u:" + options.userName + "/public/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,baseUrl + options.userName + "/public"));
         } else if ("unreadBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/u:" + options.userName + "/unread/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,baseUrl + options.userName + "/unread"));
         } else if ("untaggedBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/u:" + options.userName + "/untagged/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,baseUrl + options.userName + "/untagged"));
         } else if ("starredBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/u:" + options.userName + "/starred/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,baseUrl + options.userName + "/starred"));
         } else if ("networkBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/network/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,protocol + "pinboard.in/network"));
         } else if ("recentBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/recent/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,protocol + "pinboard.in/recent"));
         } else if ("popularBookmarks" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], openMethod + "(\"" + protocol + "pinboard.in/popular/\");");
+          addMenuItem(allMenuItems[menuItem], buildConnectFunction(openMethod,protocol + "pinboard.in/popular"));
         } else if ("saveBookmark" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], "saveBookmark();");
+          addMenuItem(allMenuItems[menuItem], function(){saveBookmark();});
         } else if ("readLater" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], "readLater();");
+          addMenuItem(allMenuItems[menuItem], function(){readLater();});
         } else if ("addNote" == menuItem) {
-          addMenuItem(allMenuItems[menuItem], "openUrl(\"" + protocol + "pinboard.in/note/add/\");");
+          addMenuItem(allMenuItems[menuItem], function(){openUrl(protocol + "pinboard.in/note/add");});
         }
       }
     }
   }
-}    
+}
+
+function buildConnectFunction(openMethod, url){
+  return function(){
+    if(openMethod === "reOpenUrl"){
+      reopenUrl(url)
+    }else{
+      openUrl(url);
+    }
+  };
+}
 
 function openUrl(url) {
   chrome.tabs.create({url: url});
