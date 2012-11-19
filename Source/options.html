@@ -1,257 +1,181 @@
 <html>
-	<head>
-		<title>Pinboard Options</title>
-		<script type="text/javascript" src="jquery-1.6.2.min.js"></script> 
-		<script type="text/javascript" src="jquery-ui-1.8.16.custom.min.js"></script> 
-		<script type="text/javascript">
-			
-            $(function() {
-				$("#active-menu-items, #inactive-menu-items").sortable({
-					connectWith: ".menu-items"
-				}).disableSelection();
-			});
-		
-			function getTextValue(elementId) {				
-				return document.getElementById(elementId).value;
-			}
+  <head>
+    <title>Pinboard Options</title>
+    <script type="text/javascript" src="jquery-1.8.2.min.js"></script> 
+    <script type="text/javascript" src="jquery-ui-1.9.1.custom.min.js"></script> 
+    <script type="text/javascript" src="options.js"> </script>
+    <style type="text/css">
 
-			function setTextValue(elementId, text) {				
-				document.getElementById(elementId).value = text;
-			}
-            
-			function getCheckboxState(elementId) {
-				return document.getElementById(elementId).checked ? "yes" : "no";
-			}
+      body {
+        padding-left: 2px;
+        padding-right: 2px;
+        font-family: helvetica, arial, sans-serif;
+        font-size: 87%;
+      }
 
-			function setCheckboxState(elementId, checked) {
-				document.getElementById(elementId).checked = ("yes" == checked);
-			}
-			
-			function getMenuItems() {
-				return $("#active-menu-items").sortable("toArray");
-			}
-			
-			function setMenuItems(menuItems) {
-				var allMenuItems = chrome.extension.getBackgroundPage().getAllMenuItems();
-				for (var i in menuItems) {					
-					var menuItem = menuItems[i];
-					if (menuItem in allMenuItems) {
-						addMenuItem("active-menu-items", menuItem, allMenuItems[menuItem]);							
-					}
-				}
-				for (var menuItem in allMenuItems) {
-					if (-1 == menuItems.indexOf(menuItem)) {
-						addMenuItem("inactive-menu-items", menuItem, allMenuItems[menuItem]);
-					}
-				}
-			}
+      #message {
+        background-color: #ffffbb;
+        position: fixed;
+        width: 100%;
+        left: 0px;
+        top: 0px;                
+        border-bottom: 1px solid #bbb;
+        height: 26px;
+        line-height: 26px;
+        text-align: center;
+        text-indent: 30px;
+        xvisibility: hidden;
+        display:none;
+        -webkit-box-shadow: 0px 0px 3px #ddd;
+      }
 
-			function addMenuItem(parentElementId, id, name) {				
-				var parentElement = document.getElementById(parentElementId);
-				if (null != parentElement) {
-					var menuItemElement = document.createElement("div");
-					menuItemElement.setAttribute("class", "menu-item");
-					menuItemElement.setAttribute("id", id);
-					menuItemElement.appendChild(document.createTextNode(name));
-					parentElement.appendChild(menuItemElement);
-				}				
-			}
-			
-			function showSavedMessage() {
-				$("#message").slideDown().delay(1000).slideUp();
-			}
-            
-            function load() {
-                var options = chrome.extension.getBackgroundPage().getOptions();
-				setTextValue("user-name", options.userName);
-				setCheckboxState("use-https", options.useHttps);
-				setCheckboxState("reuse-tabs", options.reuseTabs);
-				setMenuItems(options.menuItems);
-            }
-            
-			function save() {	
-                chrome.extension.getBackgroundPage().setOptions({
-					userName: getTextValue("user-name"),
-					useHttps: getCheckboxState("use-https"),
-					reuseTabs: getCheckboxState("reuse-tabs"),
-					menuItems: getMenuItems("active-menu-items")
-				});	
-				showSavedMessage();
-			}
-			
-		</script>
-        <style type="text/css">
-        
-            body {
-                padding-left: 2px;	
-                padding-right: 2px;	
-                font-family: helvetica, arial, sans-serif;
-                font-size: 87%;
-            }
-            
-            #message {
-				background-color: #ffffbb;
-                position: fixed;
-                width: 100%;
-                left: 0px;
-                top: 0px;                
-                border-bottom: 1px solid #bbb;						
-                height: 26px;
-                line-height: 26px;
-                text-align: center;
-				text-indent: 30px;
-				xvisibility: hidden;
-				display:none;
-				-webkit-box-shadow: 0px 0px 3px #ddd;
-            }
-			
-			#message-text {
-				background-image: url('info_16.png'); 
-				background-repeat: no-repeat; 					
-				padding-left: 20px;
-			}
-			
-            #title {
-                background-image: url('icon_64.png');
-                background-repeat: no-repeat;
-                font-size: 175%;
-                height: 64px;
-                line-height: 64px;
-                margin-right: 10px;
-                text-indent: 70px;
-                margin-bottom:10px;
-            }
-            
-            .table {
-                background-color: #f4f6fc;
-                border-top: 1px solid #b5c7de;		
-                border-bottom: 1px solid #EDEFF5;
-				margin-bottom: 10px;
-			}
+      #message-text {
+        background-image: url('info_16.png'); 
+        background-repeat: no-repeat; 
+        padding-left: 20px;
+      }
 
-            .table-header {
-                background-color: #ebeff9;	
-                line-height: 20px;
-                vertical-align: middle;		
-                text-indent: 6px;
-                border-bottom: 10px solid #f4f6fc;
-                font-weight: bold;
-            }
+      #title {
+        background-image: url('icon_64.png');
+        background-repeat: no-repeat;
+        font-size: 175%;
+        height: 64px;
+        line-height: 64px;
+        margin-right: 10px;
+        text-indent: 70px;
+        margin-bottom:10px;
+      }
 
-            .table-row {
-                font-size: 85%;
-                background-color: #f4f6fc;	
-                line-height: 35px;
-                vertical-align: middle;		
-                text-indent: 12px;
-                display: table-row;
-            }
+      .table {
+        background-color: #f4f6fc;
+        border-top: 1px solid #b5c7de;
+        border-bottom: 1px solid #EDEFF5;
+        margin-bottom: 10px;
+      }
 
-            div.table-cell {
-                display: table-cell;
-            }
-            
-            .menu { 
-				background-color: white; 
-				border: 1px solid #bbb;		
-				float: left; 				
-				margin-left: 10px; 		
-				margin-right: 10px; 
-				margin-bottom: 10px;
-				-webkit-border-radius: 3px;
-				-webkit-box-shadow: 0px 0px 3px #ddd;
-			}
-            
-            .menu-title {
-                font-weight: bold;
-                text-align: center;
-                text-indent: 0px;
-                border-bottom: 1px dotted #ccc;	
-                line-height: normal;
-                padding: 10px;                
-            }
-            
-            .menu-items {
-                min-height: 24px; 
-                padding: 10px 10px 10px 10px;
-                width: 150px;
-            }
-            
-            .menu-item {
-                font: normal 12px helvetica, arial, verdana;
-                padding: 4px; 
-                text-indent: 22px;	
-                cursor: hand;	
-                color: #555;
-                xwidth: 143;
-                background-color: #fff;
-                background-image: url('gray_star.png');
-                background-repeat: no-repeat;
-                background-position: 5px 5px; 	
-                border-bottom: 1px solid #eee;			
-            }
-            
-            .menu-item:last-child {
-                border-bottom-style: none;
-				-webkit-border-bottom-left-radius: 3px;
-                -webkit-border-bottom-right-radius: 3px;
-			}
+      .table-header {
+        background-color: #ebeff9;
+        line-height: 20px;
+        vertical-align: middle;
+        text-indent: 6px;
+        border-bottom: 10px solid #f4f6fc;
+        font-weight: bold;
+      }
 
-            .menu-item:hover {
-                color: #11A;	
-                background-color: #f2f2f2;
-                background-image: url('blue_star.png');	
-            }
-            
-            #buttons {
-                clear: both;
-            }
-            
-        </style>
-	</head>
-	<body onload="load()">	
-        <div id="message"><span id="message-text">Options Saved</span></div>
-        <div id="title">Pinboard</div>
-        <div id="general">
-            <form>
-                <div class="table">
-                    <div class="table-header">General</div>
-                    <div class="table-row">
-                        <div class="table-cell">User Name:</div>
-                        <div class="table-cell"><input type="text" id="user-name"/></div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-cell">Use HTTPS:</div>
-                        <div class="table-cell"><input type="checkbox" id="use-https"></div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-cell">Reuse Tabs:</div>
-                        <div class="table-cell"><input type="checkbox" id="reuse-tabs"></div>
-                    </div>	
-                </div>	
-            </form>	
+      .table-row {
+        font-size: 85%;
+        background-color: #f4f6fc;
+        line-height: 35px;
+        vertical-align: middle;
+        text-indent: 12px;
+        display: table-row;
+      }
+
+      div.table-cell {
+        display: table-cell;
+      }
+
+      .menu { 
+        background-color: white; 
+        border: 1px solid #bbb;
+        float: left; 
+        margin-left: 10px; 
+        margin-right: 10px; 
+        margin-bottom: 10px;
+        -webkit-border-radius: 3px;
+        -webkit-box-shadow: 0px 0px 3px #ddd;
+      }
+
+      .menu-title {
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0px;
+        border-bottom: 1px dotted #ccc;
+        line-height: normal;
+        padding: 10px;                
+      }
+
+      .menu-items {
+        min-height: 24px; 
+        padding: 10px 10px 10px 10px;
+        width: 150px;
+      }
+
+      .menu-item {
+        font: normal 12px helvetica, arial, verdana;
+        padding: 4px; 
+        text-indent: 22px;
+        cursor: hand;
+        color: #555;
+        xwidth: 143;
+        background-color: #fff;
+        background-image: url('gray_star.png');
+        background-repeat: no-repeat;
+        background-position: 5px 5px; 
+        border-bottom: 1px solid #eee;
+      }
+
+      .menu-item:last-child {
+        border-bottom-style: none;
+        -webkit-border-bottom-left-radius: 3px;
+        -webkit-border-bottom-right-radius: 3px;
+      }
+
+      .menu-item:hover {
+        color: #11A;
+        background-color: #f2f2f2;
+        background-image: url('blue_star.png');
+      }
+
+      #buttons {
+        clear: both;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="message"><span id="message-text">Options Saved</span></div>
+    <div id="title">Pinboard</div>
+    <div id="general">
+      <form>
+        <div class="table">
+          <div class="table-header">General</div>
+          <div class="table-row">
+            <div class="table-cell">User Name:</div>
+            <div class="table-cell"><input type="text" id="user-name"/></div>
+          </div>
+          <div class="table-row">
+            <div class="table-cell">Use HTTPS:</div>
+            <div class="table-cell"><input type="checkbox" id="use-https"></div>
+          </div>
+          <div class="table-row">
+            <div class="table-cell">Reuse Tabs:</div>
+            <div class="table-cell"><input type="checkbox" id="reuse-tabs"></div>
+          </div>
         </div>
-        <div id="menu">
-            <div class="table">
-                <div class="table-header">Menu</div>
-                <div class="table-row">
-                    <div class="table-cell">
-                        <div class="menu">
-                            <div class="menu-title">Active Items</div>
-                            <div id="active-menu-items" class="menu-items"></div>
-						</div>
-                        <div class="menu">
-                            <div class="menu-title">Inactive Items</div>
-                            <div id="inactive-menu-items" class="menu-items"></div>
-                        </div>
-                    </div>
-                </div>
+      </form>
+    </div>
+    <div id="menu">
+      <div class="table">
+        <div class="table-header">Menu</div>
+        <div class="table-row">
+          <div class="table-cell">
+            <div class="menu">
+              <div class="menu-title">Active Items</div>
+              <div id="active-menu-items" class="menu-items"></div>
             </div>
+            <div class="menu">
+              <div class="menu-title">Inactive Items</div>
+              <div id="inactive-menu-items" class="menu-items"></div>
+            </div>
+          </div>
         </div>
-        <div id="buttons">
-            <button onclick="save();">Save</button>
-            <button onclick="window.close();">Close</button>								
-        </div>		
-	</body>
+      </div>
+    </div>
+    <div>
+      <button id="save_button">Save</button>
+      <button id="close_button">Close</button>
+    </div>
+  </body>
 </html>
-	
+
