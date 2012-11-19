@@ -1,3 +1,15 @@
+chrome.extension.onMessage.addListener(
+    function(request, sender, sendResponse) {
+      chrome.tabs.getSelected(null , function(tab) {
+        window.open("https://pinboard.in/add?later=yes&noui=yes&jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=0,height=0");
+        var notification = webkitNotifications.createHTMLNotification("notification.html");
+        notification.show();
+        setTimeout(function(){notification.cancel();}, 3000);
+      });
+    }
+);
+
+
 function getOptionValue(name, defaultValue) {
   var value = localStorage.getItem(name);
   return value ? value : defaultValue;
@@ -92,3 +104,4 @@ function updateIcon() {
 }
 
 updateIcon();
+

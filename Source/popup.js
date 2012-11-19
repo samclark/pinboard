@@ -11,6 +11,7 @@ function addMenuItem(name, onClickFunction) {
 }
 
 function addMenuItems() {
+  
   var options = chrome.extension.getBackgroundPage().getOptions();
   if ("" === options.userName) {
     addMenuItem("Setup User Name", function(){
@@ -109,4 +110,6 @@ function readLater() {
 }
 
 window.addEventListener('DOMContentLoaded', addMenuItems);
+
+
 

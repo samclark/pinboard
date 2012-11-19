@@ -7,6 +7,12 @@
     "64": "icon_64.png",
     "128": "icon_128.png" 
   },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "js": ["content.js"]
+    }
+  ],
   "background":{ 
     "page":"background.html"
   },
@@ -18,7 +24,8 @@
   "options_page": "options.html",
   "permissions": [ 
     "tabs", 
-  "http://*/*"
+    "http://*/*",
+    "notifications"
     ]    
 }
 
