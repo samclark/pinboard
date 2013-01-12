@@ -1,0 +1,198 @@
+<html>
+	<head>
+		<title>Pinboard Options</title>
+        <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.9.2.custom.min.js"></script>
+        <script type="text/javascript" src="settings.js"></script>
+        <script type="text/javascript" src="options.js"></script>
+        <style>
+            body {
+                padding-left: 2px;
+                padding-right: 2px;
+                font-family: helvetica, arial, sans-serif;
+                font-size: 87%;
+            }
+            
+            #message {
+				background-color: #ffffbb;
+                position: fixed;
+                width: 100%;
+                left: 0px;
+                top: 0px;
+                border-bottom: 1px solid #bbb;
+                height: 26px;
+                line-height: 26px;
+                text-align: center;
+				text-indent: 30px;
+				display:none;
+				-webkit-box-shadow: 0px 0px 3px #ddd;
+            }
+			
+			#message-text {
+				background-image: url('info_16.png');
+				background-repeat: no-repeat;
+				padding-left: 20px;
+			}
+			
+            #title {
+                background-image: url('icon_64.png');
+                background-repeat: no-repeat;
+                font-size: 175%;
+                height: 64px;
+                line-height: 64px;
+                margin-right: 10px;
+                text-indent: 70px;
+                margin-bottom:10px;
+            }
+            
+            a, a:visited { 
+            	color: blue;
+            }
+            
+            .table {
+                background-color: #f4f6fc;
+                border-top: 1px solid #b5c7de;
+                border-bottom: 1px solid #EDEFF5;
+				margin-bottom: 10px;
+			}
+            
+            .table-header {
+                background-color: #ebeff9;
+                line-height: 20px;
+                vertical-align: middle;
+                text-indent: 6px;
+                border-bottom: 10px solid #f4f6fc;
+                font-weight: bold;
+            }
+            
+            .table-row {
+                font-size: 85%;
+                background-color: #f4f6fc;
+                line-height: 35px;
+                vertical-align: middle;
+                text-indent: 12px;
+                display: table-row;
+            }
+            
+            div.table-cell {
+                display: table-cell;
+            }
+            
+            .menu {
+				background-color: white;
+				border: 1px solid #bbb;
+				float: left;
+				margin-left: 10px;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				-webkit-border-radius: 3px;
+				-webkit-box-shadow: 0px 0px 3px #ddd;
+			}
+            
+            .menu-title {
+                font-weight: bold;
+                text-align: center;
+                text-indent: 0px;
+                border-bottom: 1px dotted #ccc;
+                line-height: normal;
+                padding: 10px;
+            }
+            
+            .menu-items {
+                min-height: 24px;
+                padding: 10px 10px 10px 10px;
+                width: 150px;
+            }
+            
+            .menu-item {
+                font: normal 12px helvetica, arial, verdana;
+                padding: 4px;
+                text-indent: 22px;
+                cursor: hand;
+                color: #555;
+                xwidth: 143;
+                background-color: #fff;
+                background-image: url('star_12_gray.png');
+                background-repeat: no-repeat;
+                background-position: 5px 5px;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .menu-item:last-child {
+                border-bottom-style: none;
+				-webkit-border-bottom-left-radius: 3px;
+                -webkit-border-bottom-right-radius: 3px;
+			}
+            
+            .menu-item:hover {
+                color: #11A;
+                background-color: #f2f2f2;
+                background-image: url('star_12_blue.png');
+            }
+            
+            #buttons {
+                clear: both;
+            }
+            
+            #api-token {
+	            margin-left: 10px;
+            }
+            
+            #always-open-new-tabs, #show-desktop-notifications {
+            	margin-right: 10px;   
+            }
+        </style>
+	</head>
+	<body>
+        <div id="message"><span id="message-text">Options Saved</span></div>
+        <div id="title">Pinboard</div>
+        <div id="user">
+            <form>
+                <div class="table">
+                    <div class="table-header">User</div>                    
+                    <div class="table-row">
+                        <div class="table-cell"><span>API Token:</span><span><input type="text" id="api-token" size="45" placeholder="username:ABCDEFGHIJ0123456789"/></span></div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell"><span>Find your API token on your <a href="https://pinboard.in/settings/password" target="_blank">pinboard settings password</a> page.</span></div>
+                    </div>                    
+                </div
+            </form>	
+        </div>
+        <div id="general">
+            <form>
+                <div class="table">
+                    <div class="table-header">General</div>
+                    <div class="table-row">
+                        <div class="table-cell"><input type="checkbox" id="always-open-new-tabs" />Always open new tabs</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="table-cell"><input type="checkbox" id="show-desktop-notifications" />Show desktop notifications</div>
+                    </div>
+                </div
+            </form>	
+        </div>
+        <div id="menu">
+            <div class="table">
+                <div class="table-header">Menu</div>
+                <div class="table-row">
+                    <div class="table-cell">
+                        <div class="menu">
+                            <div class="menu-title">Active Items</div>
+                            <div id="active-menu-items" class="menu-items"></div>
+						</div>
+                        <div class="menu">
+                            <div class="menu-title">Inactive Items</div>
+                            <div id="inactive-menu-items" class="menu-items"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="buttons">
+            <button id="saveButton" type="button">Save</button>
+            <button id="closeButton" type="button">Close</button>
+        </div>		
+	</body>
+</html>
+	
