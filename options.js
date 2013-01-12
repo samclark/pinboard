@@ -69,11 +69,11 @@ function saveSettings() {
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('closeButton').addEventListener('click', function() { window.close(); });
-    $(function() {
+	loadSettings();
+	$(function() {
 		$("#active-menu-items, #inactive-menu-items").sortable( {
 			connectWith: ".menu-items" 
 		}).disableSelection();
 	});
-	loadSettings();
     document.getElementById('saveButton').addEventListener('click', saveSettings);
 });
