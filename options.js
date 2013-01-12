@@ -53,7 +53,7 @@ function loadSettings() {
 }
 
 function showSavedMessage() {
-	$("#message").slideDown().delay(1000).slideUp();
+	$("#message").fadeIn('slow', function() { setTimeout(function() { $("#message").fadeOut('fast') }, 500); });
 }
 			
 function saveSettings() {
@@ -67,12 +67,8 @@ function saveSettings() {
     showSavedMessage();
 }
 
-function closeWindow() {
-    window.close();
-}
-
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('closeButton').addEventListener('click', closeWindow);
+    document.getElementById('closeButton').addEventListener('click', function() { window.close(); });
     $(function() {
 		$("#active-menu-items, #inactive-menu-items").sortable( {
 			connectWith: ".menu-items" 
