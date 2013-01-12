@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+		<title>Pinboard Toolbar Button</title>
+        <script src="settings.js"></script>
+        <script src="popup.js"></script>
+        <style>
+            .menu-item {
+                font: normal 12px helvetica, arial, verdana;
+                padding: 4px;
+                text-indent: 22px;
+                cursor: hand;
+                color: #555;
+                width: 143;
+                background-color: #fff;
+                background-image: url('star_12_gray.png');
+                background-repeat: no-repeat;
+                background-position: 5px 5px;
+                border-bottom: 1px solid #eee;
+            }
+			
+            .menu-item:first-child {
+                -webkit-border-top-left-radius: 3px;
+                -webkit-border-top-right-radius: 3px;
+            }
+            
+            .menu-item:last-child {
+                -webkit-border-bottom-left-radius: 3px;
+                -webkit-border-bottom-right-radius: 3px;
+                border-bottom-style: none;
+            }
+            
+            #selected-menu-item, .menu-item:hover {
+                color: #11A;
+                background-color: #f2f2f2;
+                background-image: url('star_12_blue.png');
+            }						
+        </style>
+  	</head>
+  	<body>
+  		<div id="menu" />
+	</body>
+</html>
