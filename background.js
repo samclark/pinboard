@@ -89,13 +89,14 @@ function popularBookmarks() {
 
 function saveBookmark() {
 	chrome.tabs.getSelected(null , function(tab) {
-		var selection = "";
-		if (selection.length > 0) {
-			window.open("https://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title) + "&description=" + encodeURIComponent(selection.substr(0, 256)), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=550");
-		} 
-		else {
-			window.open("https://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=550");
-        }
+		chrome.tabs.sendRequest(tab.id, {method: "getSelection"}, function(response) {
+			if (null != response && null != response.data && 0 < response.data.length) {
+				window.open("https://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title) + "&description=" + encodeURIComponent(response.data.substr(0, 256)), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=550");
+			} 
+			else {
+				window.open("https://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=550");
+			} 
+		});
     });
 }
 
