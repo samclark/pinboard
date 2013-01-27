@@ -14,6 +14,12 @@
 			"background.js"
 		]
     },
+    "content_scripts": [{
+    	"matches": ["http://*/*", "https://*/*"],
+    	"run_at": "document_start",
+    	"js": ["selection.js"],
+    	"all_frames": true
+    }],
     "browser_action": {
         "default_icon": "icon_19_light.png",
         "default_title": "Pinboard",
