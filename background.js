@@ -149,10 +149,10 @@ function addNote() {
 
 document.addEventListener("DOMContentLoaded", function () {
 	chrome.commands.onCommand.addListener(function(command) {
-		if ("savebookmark" == command) {
+		if ("save-bookmark" == command) {
 	  		saveBookmark();
 	  	}
-	  	else if ("readlater" == command) {
+	  	else if ("read-later" == command) {
 	  		readLater();
 	  	}
 	});
