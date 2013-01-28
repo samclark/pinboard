@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Pinboard",
-    "version": "2.0",
+    "version": "2.2.1",
     "description": "A toolbar button for the Pinboard bookmarking service (http://pinboard.in).",
     "icons": {
 		"64": "icon_64.png",
@@ -48,14 +48,14 @@
         "star_12_gray.png"
     ],
     "commands": {
-    	"savebookmark": {
+    	"save-bookmark": {
 	    	"suggested_key": {
 		    	"default": "Ctrl+Shift+K",
 		    	"mac": "Command+Shift+K"
 		    },
 		    "description": "Save Bookmark"
 		},
-		"readlater": {
+		"read-later": {
 	    	"suggested_key": {
 		    	"default": "Ctrl+Shift+L",
 		    	"mac": "Command+Shift+L"
