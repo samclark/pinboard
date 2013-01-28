@@ -1,4 +1,3 @@
-
 var cachedSettings = null;
 
 function getSettings() {
@@ -150,10 +149,10 @@ function addNote() {
 
 document.addEventListener("DOMContentLoaded", function () {
 	chrome.commands.onCommand.addListener(function(command) {
-		if ("save-bookmark" == command) {
+		if ("savebookmark" == command) {
 	  		saveBookmark();
 	  	}
-	  	else if ("read-later" == command) {
+	  	else if ("readlater" == command) {
 	  		readLater();
 	  	}
 	});
