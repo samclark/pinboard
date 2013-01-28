@@ -48,17 +48,17 @@
         "star_12_gray.png"
     ],
     "commands": {
-    	"save-bookmark": {
+    	"savebookmark": {
 	    	"suggested_key": {
-		    	"default": "Ctrl+D",
-		    	"mac": "Command+D"
+		    	"default": "Ctrl+Shift+K",
+		    	"mac": "Command+Shift+K"
 		    },
 		    "description": "Save Bookmark"
 		},
-		"read-later": {
+		"readlater": {
 	    	"suggested_key": {
-		    	"default": "Ctrl+L",
-		    	"mac": "Command+L"
+		    	"default": "Ctrl+Shift+L",
+		    	"mac": "Command+Shift+L"
 		    },
 		    "description": "Read Later"
 		}
