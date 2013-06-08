@@ -58,7 +58,10 @@ function addMenuItems() {
 					addMenuItem(allMenuItems[menuItem], function () { chrome.extension.getBackgroundPage().popularBookmarks(); closePopups(); });
 				} 
 				else if ("saveBookmark" == menuItem) {
-					addMenuItem(allMenuItems[menuItem], function () { chrome.extension.getBackgroundPage().saveBookmark(); closePopups(); });
+					addMenuItem(allMenuItems[menuItem], function () { 
+						closePopups(); // close popup first, to avoid blocking saveBookmark:
+						chrome.extension.getBackgroundPage().saveBookmark(); 
+					});
 				} 
 				else if ("readLater" == menuItem) {
 					addMenuItem(allMenuItems[menuItem], function () { chrome.extension.getBackgroundPage().readLater(); closePopups(); });
