@@ -11,16 +11,16 @@ function setSettings(settings) {
 function getAllMenuItems() {
 	return {
 		allBookmarks : "All Bookmarks",
-		privateBookmarks : "Private Bookmarks", 
-		publicBookmarks : "Public Bookmarks", 
-		unreadBookmarks : "Unread Bookmarks", 
-		untaggedBookmarks : "Untagged Bookmarks", 
-		starredBookmarks : "Starred Bookmarks", 
-		networkBookmarks : "Network Bookmarks", 
-		recentBookmarks : "Recent Bookmarks", 
-		popularBookmarks : "Popular Bookmarks", 
-		saveBookmark : "Save Bookmark", 
-		readLater : "Read Later", 
+		privateBookmarks : "Private Bookmarks",
+		publicBookmarks : "Public Bookmarks",
+		unreadBookmarks : "Unread Bookmarks",
+		untaggedBookmarks : "Untagged Bookmarks",
+		starredBookmarks : "Starred Bookmarks",
+		networkBookmarks : "Network Bookmarks",
+		recentBookmarks : "Recent Bookmarks",
+		popularBookmarks : "Popular Bookmarks",
+		saveBookmark : "Save Bookmark",
+		readLater : "Read Later",
 		addNote : "Add Note"
 	};
 }
@@ -29,7 +29,7 @@ function getUserNameFromApiToken(apiToken) {
 	return apiToken ? apiToken.substring(0, apiToken.indexOf(":")) : "";
 }
 
-function openUrl(url) {	
+function openUrl(url) {
 	if ("yes" == getSettings().alwaysOpenNewTabs) {
 		chrome.tabs.create({url: url});
 	} else {
@@ -91,10 +91,10 @@ function saveBookmark() {
 		chrome.tabs.sendRequest(tab.id, {method: "getSelection"}, function(response) {
 			if (null != response && null != response.data && 0 < response.data.length) {
 				window.open("https://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title) + "&description=" + encodeURIComponent(response.data.substr(0, 256)), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=550");
-			} 
+			}
 			else {
 				window.open("https://pinboard.in/add?jump=close&url=" + encodeURIComponent(tab.url) + "&title=" + encodeURIComponent(tab.title), "pinboad.in", "location=no,links=no,scrollbars=no,toolbar=no,width=700,height=550");
-			} 
+			}
 		});
     });
 }
@@ -119,31 +119,43 @@ function readLater() {
 			if (200 == data.status) {
 				var result = $(data.responseXML).find("result").attr("code");
 				if ("done" == result) {
-					if ("yes" == getSettings().showDesktopNotifications) {
-						var notification = new Notification("Saved Read Later", { icon: "icon_48.png" });
-						notification.onshow = function() { setTimeout(function(){ notification.cancel(); }, 5000); };
-						notification.onclick = function() { notification.cancel(); };
-						notification.show();
-					}
+				  if ("yes" == getSettings().showDesktopNotifications) {
+            chrome.notifications.create("", {
+                type: 'basic',
+                iconUrl: "icon_48.png",
+                title: "Saved Read Later",
+                message: ""
+              }, function(notificationId){
+                setTimeout(function(){
+                  chrome.notifications.clear(notificationId, function(wasCleared) { });
+                }, 2000);
+            });
+          }
 				}
-				else {	
-					var notification = new Notification("Error Saving Read Later", { icon: "icon_48.png", body: "Error: " + result });
-					notification.onshow = function() { setTimeout(function(){ notification.cancel(); }, 5000); };
-					notification.onclick = function() { notification.cancel(); };
-					notification.show();
+				else {
+          chrome.notifications.create("", {
+              type: 'basic',
+              iconUrl: "icon_48.png",
+              title: "Error Saving Read Later",
+              message: result
+            }, function(notificationId){ }
+          );
 				}
 			}
-			else {	
-				var notification = new Notification("Error Saving Read Later", { icon: "icon_48.png", body: data.statusText });
-				notification.onshow = function() { setTimeout(function(){ notification.cancel(); }, 5000); };
-				notification.onclick = function() { notification.cancel(); };
-				notification.show();
+			else {
+        chrome.notifications.create("", {
+            type: 'basic',
+            iconUrl: "icon_48.png",
+            title: "Error Saving Read Later",
+            message: data.statusText
+          }, function(notificationId){ }
+        );
 			}
-		});	
+		});
 	});
 }
 
-function addNote() {    
+function addNote() {
 	openUrl("https://pinboard.in/note/add/");
 }
 
@@ -156,10 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	  		readLater();
 	  	}
 	});
-	
+
 	setSettings(getSettingsFromLocalStorage());
-	
+
 	chrome.browserAction.setIcon({ path: "icon_19_dark.png" });
 });
-
-
