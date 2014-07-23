@@ -105,10 +105,10 @@ function readLater() {
 			contentType: "text/plain",
 			crossDomain: true,
 			data: {
-		    	auth_token: getSettings().apiToken,
+        auth_token: getSettings().apiToken,
 				url: tab.url,
 				description: tab.title,
-				shared: "no",
+				shared: getSettings().saveReadlaterShared,
 				toread: "yes"
 			},
 			dataType: "json",

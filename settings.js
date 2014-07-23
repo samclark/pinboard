@@ -2,6 +2,7 @@ function Settings() {
 	this.apiToken = "";
 	this.alwaysOpenNewTabs = "no";
 	this.showDesktopNotifications = "yes";
+  this.saveReadlaterShared = "yes";
 	this.menuItems = [];
 }
 
@@ -38,6 +39,7 @@ function getSettingsFromLocalStorage() {
 	settings.apiToken = getValueFromLocalStorage("apiToken", "");
 	settings.alwaysOpenNewTabs = getValueFromLocalStorage("alwaysOpenNewTabs", "no");
 	settings.showDesktopNotifications = getValueFromLocalStorage("showDesktopNotifications", "yes");
+	settings.saveReadlaterShared = getValueFromLocalStorage("saveReadlaterShared", "yes");
 	settings.menuItems = getArrayValuesFromLocalStorage("menuItems", []);
 	return settings;	
 }
@@ -46,5 +48,6 @@ function setSettingsInLocalStorage(settings) {
 	setValueInLocalStorage("apiToken", settings.apiToken);
 	setValueInLocalStorage("alwaysOpenNewTabs", settings.alwaysOpenNewTabs);
 	setValueInLocalStorage("showDesktopNotifications", settings.showDesktopNotifications);
+  setValueInLocalStorage("saveReadlaterShared", settings.saveReadlaterShared);
 	setArrayValuesInLocalStorage("menuItems", settings.menuItems);
 }
