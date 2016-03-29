@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Pinboard Beta",
-    "version": "3.0",
+    "name": "Pinboard",
+    "version": "2.2.5",
     "description": "A toolbar button for the Pinboard bookmarking service (http://pinboard.in).",
     "icons": {
 		"64": "icon_64.png",
