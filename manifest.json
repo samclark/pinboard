@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Pinboard",
-    "version": "2.2.2",
+    "name": "Pinboard Beta",
+    "version": "3.0",
     "description": "A toolbar button for the Pinboard bookmarking service (http://pinboard.in).",
     "icons": {
 		"64": "icon_64.png",
@@ -14,12 +14,6 @@
 			"background.js"
 		]
     },
-    "content_scripts": [{
-    	"matches": ["http://*/*", "https://*/*"],
-    	"run_at": "document_start",
-    	"js": ["selection.js"],
-    	"all_frames": true
-    }],
     "browser_action": {
         "default_icon": "icon_19_light.png",
         "default_title": "Pinboard",
