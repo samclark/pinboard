@@ -1,0 +1,79 @@
+{
+  "appName": {
+    "message": "Pinboard X",
+    "description": "The name of the application"
+  },
+  "appShortName": {
+    "message": "Pinboard X",
+    "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
+  },
+  "appDescription": {
+    "message": "A web extension for the Pinboard bookmarking service (http://pinboard.in).",
+    "description": "The description of the application"
+  },
+  "browserActionTitle": {
+    "message": "Pinboard X",
+    "description": "The title of the browser action button"
+  },
+  "MI_ALL": {
+    "message": "All Bookmarks",
+    "description": "The 'All Bookmarks' menu item"
+  },
+  "MI_PRIVATE": {
+    "message": "Private Bookmarks",
+    "description": "The 'Private Bookmarks' menu item"
+  },
+  "MI_UNREAD": {
+    "message": "Unread Bookmarks",
+    "description": "The 'Unread Bookmarks' menu item"
+  },
+  "MI_STARRED": {
+    "message": "Starred Bookmarks",
+    "description": "The 'Starred Bookmarks' menu item"
+  },
+  "MI_NETWORK": {
+    "message": "Network Bookmarks",
+    "description": "The 'Network Bookmarks' menu item"
+  },
+  "MI_RECENT": {
+    "message": "Recent Bookmarks",
+    "description": "The 'Recent Bookmarks' menu item"
+  },
+  "MI_POPULAR": {
+    "message": "Popular Bookmarks",
+    "description": "The 'Popular Bookmarks' menu item"
+  },
+  "MI_NOTES": {
+    "message": "Notes",
+    "description": "The 'Notes' menu item"
+  },
+  "MI_SAVE_BOOKMARK": {
+    "message": "Save Bookmark",
+    "description": "The 'Save Bookmark' menu item"
+  },
+  "MI_READ_LATER": {
+    "message": "Read Later",
+    "description": "The 'Read Later' menu item"
+  },
+  "MI_OPTIONS": {
+    "message": "Options",
+    "description": "The 'Options' menu item"
+  },
+  "MI_SETUP": {
+    "message": "Set API Token",
+    "description": "The 'Setup' menu item"
+  },
+  "PO_DEFAULT": {
+    "message": "Default",
+    "description": "The 'Default' privacy option"
+  },
+  "PO_PUBLIC": {
+    "message": "Public",
+    "description": "The 'Public' privacy option"
+  },
+  "PO_PRIVATE": {
+    "message": "Private",
+    "description": "The 'Private' privacy option"
+  }
+
+}

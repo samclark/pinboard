@@ -1,0 +1,35 @@
+{
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "3.0.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "64": "images/icon-64.png",
+    "128": "images/icon-128.png"
+  },  
+  "options_ui": {
+    "page": "/index.html#/options"
+  },
+  "background": {
+    "page": "/index.html#/background"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/action-19.png",
+      "38": "images/action-38.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "/index.html#/popup"
+  },
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs",
+    "*://*/*"
+  ]
+}

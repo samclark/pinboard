@@ -1,0 +1,12 @@
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  <h4 class="alert-heading"><span>Error</span></h4>
+  <p>{{error}}</p>
+</div>
+<div class="popup">
+  <div class="list-group">
+      <a class="list-group-item list-group-item-action" *ngFor="let menuItem of menuItems" (click)="menuItemClicked(menuItem.key)">
+        <i class="fas fa-star fa-fw"></i>
+        <span [app-i18n]="'MI_' + menuItem.key">{{menuItem.key}}</span>
+      </a>
+  </div>
+</div>

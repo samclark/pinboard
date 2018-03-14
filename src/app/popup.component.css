@@ -1,0 +1,38 @@
+        
+div.popup {
+    margin: 0 0px 0 0px;
+    padding: 6px;
+    color: #666;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+div.list-group {
+    margin-bottom: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+a.list-group-item i {
+    margin-left: -2px;
+    margin-right: 2px;
+    color: #AAA;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+a.list-group-item {
+    padding: 7px 10px;
+    color: #666;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+a.list-group-item:hover,
+a.list-group-item:hover i {
+    color: #11A;
+    user-select: none;
+    -webkit-user-select: none;
+}

@@ -1,0 +1,62 @@
+<div class="options container-fluid">
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+        <h4 class="alert-heading"><span>Error</span></h4>
+        <p>{{error}}</p>
+    </div>
+    <div *ngIf="loaded">
+        <section>
+            <h4>User</h4>
+            <div class="form-group">
+                <div class="limited-width-controls">
+                    <label class="sr-only" for="authToken">API Token</label>
+                    <input id="authToken" type="text" class="form-control" size="40" placeholder="username:ABCDEFGHIJ0123456789" [(ngModel)]="options.authToken"/>
+                </div>
+                <small class="form-text text-muted">You can find your API token on your <a href="https://pinboard.in/settings/password" target="_blank">pinboard settings</a> page.</small>
+            </div>
+        </section>
+        <section>
+            <h4>General</h4>
+            <div class="form-group">
+                <div class="form-check">
+                    <label class="form-check-label" for="saveBookmarksInNewWindow">
+                        <input class="form-check-input" id="saveBookmarksInNewWindow" type="checkbox" [(ngModel)]="options.saveBookmarksInNewWindow"/><span>Save bookmarks in a new window</span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="showDesktopNotifications">
+                        <input class="form-check-input" id="showDesktopNotifications" type="checkbox" [(ngModel)]="options.showDesktopNotifications"/><span>Show desktop notifications</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h4>Privacy</h4>
+            <div class="form-group">
+                <div class="limited-width-controls">
+                    <select class="form-control" [(ngModel)]="options.privacyOverride">
+                        <option *ngFor="let privacyOverride of privacyOverrides" [value]="privacyOverride"><span [app-i18n]="'PO_' + privacyOverride">{{privacyOverride}}</span></option>
+                    </select>
+                </div>
+                <small class="form-text text-muted"><span>Set the privacy of saved bookmarks. Default is 'Public' unless you have enabled the 'save all bookmarks as private' user setting in your pinboard account, in which case default is 'private'.</span></small>
+            </div>
+        </section>
+        <section>
+            <h4>Menu</h4>
+            <div class="form-group">
+                <p class="form-text"><span>Drag and drop the menu items to order them.</span></p>
+                <div class="limited-width-controls">
+                    <ul class="list-group" [dragula]='"bag-one"' [dragulaModel]='options.menuItems'>
+                        <li class="list-group-item list-group-item-action menu-item" *ngFor="let menuItem of options.menuItems">
+                            <div class="form-check">
+                                <label class="form-check-label" [for]="menuItem.key">
+                                    <input class="form-check-input" type="checkbox" [(ngModel)]="menuItem.enabled" [id]="menuItem.key" /><span [app-i18n]="'MI_' + menuItem.key">{{menuItem.key}}</span>
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
+    </div>
+</div>

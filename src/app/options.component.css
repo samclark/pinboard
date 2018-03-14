@@ -1,0 +1,47 @@
+@import '../../node_modules/dragula/dist/dragula.min.css';
+
+div.options {
+    margin: 10px 20px 20px 20px;
+    width: 500px;
+}
+
+section h4 {
+    margin-left: -15px;
+}
+
+form {
+    width: 500px;
+}
+
+.checkbox {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.limited-width-controls {
+    max-width: 400px;
+}
+
+.list-group-item {
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: move;
+}
+
+div.checkbox {
+    margin-left: 5px;
+}
+
+.list-group-item.disabled, .list-group-item.disabled:focus, .list-group-item.disabled:hover
+{
+    cursor: move;
+}
+
+.menu-item .checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.menu-item .checkbox label {
+    cursor: move;
+}
