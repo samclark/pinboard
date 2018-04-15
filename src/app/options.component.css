@@ -45,3 +45,7 @@ div.checkbox {
 .menu-item .checkbox label {
     cursor: move;
 }
+
+li div.form-check {
+    margin-bottom: 0;
+}

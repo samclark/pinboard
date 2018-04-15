@@ -12,7 +12,8 @@
     "128": "images/icon-128.png"
   },  
   "options_ui": {
-    "page": "/index.html#/options"
+    "page": "/index.html#/options",
+    "open_in_tab": true
   },
   "background": {
     "page": "/index.html#/background"
