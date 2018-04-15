@@ -58,8 +58,3 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Authors
 
 * **Sam Clark** - [GitHub Profile](https://github.com/samclark)
-
-
-
-
-

@@ -33,7 +33,7 @@
             <h4>Privacy</h4>
             <div class="form-group">
                 <div class="limited-width-controls">
-                    <select class="form-control" [(ngModel)]="options.privacyOverride">
+                    <select class="form-control custom" [(ngModel)]="options.privacyOverride">
                         <option *ngFor="let privacyOverride of privacyOverrides" [value]="privacyOverride"><span [app-i18n]="'PO_' + privacyOverride">{{privacyOverride}}</span></option>
                     </select>
                 </div>
