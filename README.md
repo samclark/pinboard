@@ -27,13 +27,21 @@ npm run build
 
 ### Running Unit Tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+```
+npm run test
+```
 
 ### Running End-to-End Tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-### Package
+```
+npm run e2e
+```
+
+### Packaging WebExtension
 
 ```
 npm run build:zip
