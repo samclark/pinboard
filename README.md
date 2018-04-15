@@ -19,10 +19,10 @@ Run `npm install` to download all packages and their dependencies.
 npm install
 ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `npm run build:prod` flag for a production build. 
 
 ```
-ng build --aot
+npm run build
 ```
 
 ### Running Unit Tests
@@ -32,6 +32,12 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ### Running End-to-End Tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+### Package
+
+```
+npm run build:zip
+```
 
 ## Built With
 
