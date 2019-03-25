@@ -13,6 +13,7 @@
   },  
   "options_ui": {
     "page": "/index.html#/options",
+    "chrome_style": false,
     "open_in_tab": true
   },
   "background": {

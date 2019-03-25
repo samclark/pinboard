@@ -3,7 +3,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { OptionsService } from './options.service';
 import { PinboardService } from './pinboard.service';
-import { Observable } from 'rxjs/Observable';
+import { IconService } from './icon.service';
 
 @Component({
   selector: 'app-background',
@@ -11,7 +11,9 @@ import { Observable } from 'rxjs/Observable';
 })
 export class BackgroundComponent implements OnInit {
 
-  constructor(private optionsService: OptionsService, private pinboardService: PinboardService) { }
+  constructor(private iconService: IconService, 
+    private optionsService: OptionsService, 
+    private pinboardService: PinboardService) { }
 
   ngOnInit() {
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -37,12 +39,9 @@ export class BackgroundComponent implements OnInit {
           })
       });
     });
-
-    browser.browserAction.setIcon({
-      path: {
-        "19": "images/action-19.png",
-        "38": "images/action-38.png"
-      }
+    this.iconService.set().subscribe(() => {
+      //updated icon
     });
   }
+
 }

@@ -11,6 +11,7 @@ export class OptionsService {
   get(): Observable<Options> {
     return Observable.fromPromise(browser.storage.local.get({
       authToken: '',
+      theme: 'LIGHT',
       saveBookmarksInNewWindow: true,
       showDesktopNotifications: true,
       privacyOverride: 'DEFAULT',
@@ -33,6 +34,7 @@ export class OptionsService {
   set(options: Options): Observable<void> {
     let values = {
       authToken: options.authToken,
+      theme: options.theme,
       saveBookmarksInNewWindow: options.saveBookmarksInNewWindow,
       showDesktopNotifications: options.showDesktopNotifications,
       privacyOverride: options.privacyOverride,

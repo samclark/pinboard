@@ -17,63 +17,70 @@
   },
   "MI_ALL": {
     "message": "All Bookmarks",
-    "description": "The 'All Bookmarks' menu item"
+    "description": "The 'all bookmarks' menu item"
   },
   "MI_PRIVATE": {
     "message": "Private Bookmarks",
-    "description": "The 'Private Bookmarks' menu item"
+    "description": "The 'private bookmarks' menu item"
   },
   "MI_UNREAD": {
     "message": "Unread Bookmarks",
-    "description": "The 'Unread Bookmarks' menu item"
+    "description": "The 'unread bookmarks' menu item"
   },
   "MI_STARRED": {
     "message": "Starred Bookmarks",
-    "description": "The 'Starred Bookmarks' menu item"
+    "description": "The 'starred bookmarks' menu item"
   },
   "MI_NETWORK": {
     "message": "Network Bookmarks",
-    "description": "The 'Network Bookmarks' menu item"
+    "description": "The 'network bookmarks' menu item"
   },
   "MI_RECENT": {
     "message": "Recent Bookmarks",
-    "description": "The 'Recent Bookmarks' menu item"
+    "description": "The 'recent bookmarks' menu item"
   },
   "MI_POPULAR": {
     "message": "Popular Bookmarks",
-    "description": "The 'Popular Bookmarks' menu item"
+    "description": "The 'popular bookmarks' menu item"
   },
   "MI_NOTES": {
     "message": "Notes",
-    "description": "The 'Notes' menu item"
+    "description": "The 'notes' menu item"
   },
   "MI_SAVE_BOOKMARK": {
     "message": "Save Bookmark",
-    "description": "The 'Save Bookmark' menu item"
+    "description": "The 'save bookmark' menu item"
   },
   "MI_READ_LATER": {
     "message": "Read Later",
-    "description": "The 'Read Later' menu item"
+    "description": "The 'read later' menu item"
   },
   "MI_OPTIONS": {
     "message": "Options",
-    "description": "The 'Options' menu item"
+    "description": "The 'options' menu item"
   },
   "MI_SETUP": {
     "message": "Set API Token",
-    "description": "The 'Setup' menu item"
+    "description": "The 'setup' menu item"
   },
   "PO_DEFAULT": {
     "message": "Default",
-    "description": "The 'Default' privacy option"
+    "description": "The 'default' privacy option"
   },
   "PO_PUBLIC": {
     "message": "Public",
-    "description": "The 'Public' privacy option"
+    "description": "The 'public' privacy option"
   },
   "PO_PRIVATE": {
     "message": "Private",
-    "description": "The 'Private' privacy option"
+    "description": "The 'private' privacy option"
+  },
+  "T_LIGHT": {
+    "message": "Light",
+    "description": "The 'light' extension theme"
+  },
+  "T_DARK": {
+    "message": "Dark",
+    "description": "The 'dark' extension theme"
   }
-
 }
