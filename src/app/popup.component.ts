@@ -17,7 +17,7 @@ export class PopupComponent implements OnInit {
   constructor(private optionsService: OptionsService) { }
 
   error: string = '';
-  theme: string = 'dark';
+  theme: string = '';
   user: string = '';
   menuItems: any[];
 
