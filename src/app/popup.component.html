@@ -2,9 +2,9 @@
   <h4 class="alert-heading"><span>Error</span></h4>
   <p>{{error}}</p>
 </div>
-<div class="popup">
+<div class="popup" [attr.theme]="theme">
   <div class="list-group">
-      <a class="list-group-item list-group-item-action" *ngFor="let menuItem of menuItems" (click)="menuItemClicked(menuItem.key)">
+      <a class="list-group-item list-group-item-action" [attr.theme]="theme" *ngFor="let menuItem of menuItems" (click)="menuItemClicked(menuItem.key)">
         <i class="fas fa-star fa-fw"></i>
         <span [app-i18n]="'MI_' + menuItem.key">{{menuItem.key}}</span>
       </a>

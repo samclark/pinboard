@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import fontawesome from '@fortawesome/fontawesome';
 import * as faStar from '@fortawesome/fontawesome-free-solid/faStar';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
-
+ 
 import { OptionsService } from './options.service';
 import { Post } from './post'
 
@@ -17,12 +17,14 @@ export class PopupComponent implements OnInit {
   constructor(private optionsService: OptionsService) { }
 
   error: string = '';
+  theme: string = 'dark';
   user: string = '';
   menuItems: any[];
 
   ngOnInit() {
     fontawesome.library.add(faStar);
     this.optionsService.get().subscribe(options => {
+      this.theme = options.theme;
       this.user = options.authToken.substring(0, options.authToken.indexOf(':'));
       if (!this.user) {
         this.menuItems = [{ key: 'SETUP', enabled: true }];

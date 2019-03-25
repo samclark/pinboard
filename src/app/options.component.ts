@@ -1,8 +1,8 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 
 import { Options } from './options'
+import { IconService } from './icon.service';
 import { OptionsService } from './options.service';
 
 @Component({
@@ -12,11 +12,17 @@ import { OptionsService } from './options.service';
 })
 export class OptionsComponent implements OnInit {
 
-  constructor(private dragulaService: DragulaService, private optionsService: OptionsService) { }
+  constructor(private dragulaService: DragulaService, 
+    private iconService: IconService, 
+    private optionsService: OptionsService) { }
 
   loaded: boolean = false;
   error: string = '';
   options: Options;
+  themes = [
+    'LIGHT',
+    'DARK'
+  ];
   privacyOverrides = [
     'DEFAULT',
     'PUBLIC',
@@ -39,7 +45,11 @@ export class OptionsComponent implements OnInit {
   save() {
     this.error = '';
     this.optionsService.set(this.options)
-      .subscribe(null, error => {
+      .subscribe(() => {
+        this.iconService.set().subscribe(() => {
+          //updated icon
+        });
+      }, error => {
         this.error = error.message || 'Unknown error.';
       });
   }

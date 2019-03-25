@@ -10,6 +10,7 @@ import { BackgroundComponent } from './background.component'
 import { OptionsComponent } from './options.component';
 import { PopupComponent } from './popup.component';
 import { I18nDirective } from './i18n.directive';
+import { IconService } from './icon.service';
 import { OptionsService } from './options.service';
 import { PinboardService } from './pinboard.service';
 
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     HttpClient,
+    IconService, 
     OptionsService, 
     PinboardService],
   bootstrap: [

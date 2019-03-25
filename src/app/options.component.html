@@ -41,6 +41,17 @@
             </div>
         </section>
         <section>
+            <h4>Appearance</h4>
+            <div class="form-group">
+                <div class="limited-width-controls">
+                    <select class="form-control custom" [(ngModel)]="options.theme">
+                        <option *ngFor="let theme of themes" [value]="theme"><span [app-i18n]="'T_' + theme">{{theme}}</span></option>
+                    </select>
+                </div>
+                <small class="form-text text-muted"><span>Set the extension theme.</span></small>
+            </div>
+        </section>
+        <section>
             <h4>Menu</h4>
             <div class="form-group">
                 <p class="form-text"><span>Drag and drop the menu items to order them.</span></p>
