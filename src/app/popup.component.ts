@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import fontawesome from '@fortawesome/fontawesome';
 import * as faStar from '@fortawesome/fontawesome-free-solid/faStar';
 import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/operator/map';
- 
+import 'rxjs/add/operator/mergeMap';
+
 import { OptionsService } from './options.service';
 import { Post } from './post'
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 @Component({
   selector: 'app-popup',
@@ -26,13 +27,9 @@ export class PopupComponent implements OnInit {
     this.optionsService.get().subscribe(options => {
       this.theme = options.theme;
       this.user = options.authToken.substring(0, options.authToken.indexOf(':'));
-      if (!this.user) {
-        this.menuItems = [{ key: 'SETUP', enabled: true }];
-      }
-      else {
-        this.menuItems = options.menuItems
-          .filter(mi => mi.enabled);
-      }
+      this.menuItems = this.user
+        ? options.menuItems.filter(mi => mi.enabled)
+        : [{ key: 'SETUP', enabled: true }];
     }, error => {
       this.error = error.message || 'Unknown error.';
     });
@@ -78,64 +75,51 @@ export class PopupComponent implements OnInit {
   }
 
   private openUrl(url: string) {
-    browser.tabs.create({ url });
-    this.closePopups();
+    browser.tabs.create({ url })
+      .then(this.closePopups);
   }
 
   private saveBookmark() {
-    Observable.fromPromise(browser.tabs.query({ currentWindow: true, active: true }))
-      .subscribe(tabs => {
-        if (tabs.length != 1)
-          throw new Error('Can not quert current tab.');
-        Observable.fromPromise(browser.tabs.executeScript(tabs[0].id, { code: "window.getSelection().toString().trim();" }))
-          .subscribe(data => {
-            let url: String;
-            if (data.length > 0 && data[0]) {
-              url = `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}&description=${data[0]}`;
-            } else {
-              url = `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}`;
-            }
-            browser.windows.create({
-              height: 550,
-              width: 700,
-              state: 'normal',
-              type: 'panel',
-              url: url.substr(0, 2000)
-            });
-          }, error => {
-            browser.windows.create({
-              height: 550,
-              width: 700,
-              state: 'normal',
-              type: 'panel',
-              url: `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}`.substr(0, 2000)
-            });
-          });
-        this.closePopups();
-      });
+    browser.tabs.query({ currentWindow: true, active: true })
+      .then(tabs =>       
+        browser.tabs.executeScript(tabs[0].id, { code: "window.getSelection().toString().trim();" })
+        .then(data => data.length > 0 && data[0] ? data[0] : null, _ => null)
+        .then(selected => selected
+          ? `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}&description=${selected}`
+          : `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}`)
+        .then(url => browser.windows.create({
+          height: 550,
+          width: 700,
+          state: 'normal',
+          type: 'panel',
+          url: url.substr(0, 2000)
+        }))
+      )
+      .then(this.closePopups);
   }
 
   private readLater() {
-    Observable.fromPromise(browser.tabs.query({ currentWindow: true, active: true }))
-      .subscribe(data => {
-        if (data.length != 1)
-          throw new Error('Can not quert current tab.');
+    browser.tabs.query({ currentWindow: true, active: true })
+      .then(tabs => {
+        if (tabs.length != 1)
+          throw new Error('Can not query current tab.');
         let post = new Post();
-        post.url = data[0].url;
-        post.description = data[0].title;
+        post.url = tabs[0].url;
+        post.description = tabs[0].title;
         post.toRead = true;
         browser.runtime.sendMessage(post);
-        this.closePopups();
-      });
+      })
+      .then(this.closePopups);
   }
 
   private openOptions() {
     if (browser.runtime.openOptionsPage) {
-      Observable.fromPromise(browser.runtime.openOptionsPage()).subscribe();
+      browser.runtime.openOptionsPage()
+        .then(this.closePopups);
     } else {
-      browser.tabs.create({ url: browser.extension.getURL('index.html#/options') });
+      browser.tabs.create({ url: browser.extension.getURL('index.html#/options') })
+        .then(this.closePopups);
     }
-    this.closePopups();
   }
 
   private closePopups() {

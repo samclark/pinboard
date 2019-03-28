@@ -13,6 +13,7 @@ import { I18nDirective } from './i18n.directive';
 import { IconService } from './icon.service';
 import { OptionsService } from './options.service';
 import { PinboardService } from './pinboard.service';
+import { NotificationService } from './notification.service';
 
 const appRoutes: Routes = [
   { path: 'background', component: BackgroundComponent },
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     HttpClient,
     IconService, 
     OptionsService, 
-    PinboardService],
+    PinboardService,
+    NotificationService],
   bootstrap: [
     AppComponent
   ]

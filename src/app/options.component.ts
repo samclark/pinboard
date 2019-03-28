@@ -17,6 +17,7 @@ export class OptionsComponent implements OnInit {
     private optionsService: OptionsService) { }
 
   loaded: boolean = false;
+  saving: boolean = false;
   error: string = '';
   options: Options;
   themes = [
@@ -36,21 +37,19 @@ export class OptionsComponent implements OnInit {
     }, error => {
       this.error = error.message || 'Unknown error.';
     });
-
-    this.dragulaService.dropModel.subscribe(_ => {
+    this.dragulaService.dropModel.subscribe(x => {
 
     });
   }
 
   save() {
     this.error = '';
+    this.saving = true;
     this.optionsService.set(this.options)
-      .subscribe(() => {
-        this.iconService.set().subscribe(() => {
-          //updated icon
-        });
-      }, error => {
+      .flatMap(() => this.iconService.set())
+      .subscribe(null, error => {
         this.error = error.message || 'Unknown error.';
       });
+    this.saving = false;
   }
 }
