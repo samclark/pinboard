@@ -1,11 +1,12 @@
 
-import {mergeMap} from 'rxjs/operators';
+import {mergeMap, debounce} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 
 import { Options } from './options'
 import { IconService } from './icon.service';
 import { OptionsService } from './options.service';
+import { Subscription, timer, Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-options',
@@ -17,7 +18,9 @@ export class OptionsComponent implements OnInit {
   constructor(private dragulaService: DragulaService, 
     private iconService: IconService, 
     private optionsService: OptionsService) { }
-
+  
+  onChange: Subject<void> = new Subject<void>();
+  subs: Subscription = new Subscription();
   loaded: boolean = false;
   saving: boolean = false;
   error: string = '';
@@ -39,12 +42,22 @@ export class OptionsComponent implements OnInit {
     }, error => {
       this.error = error.message || 'Unknown error.';
     });
-    this.dragulaService.dropModel.subscribe(x => {
+    this.subs.add(this.dragulaService.dropModel("menu")
+      .subscribe(() => {
+        this.onChange.next();
+      })
+    );
+    this.onChange
+      .pipe(debounce(() => timer(250)))
+      .subscribe(() => this.save());
+  }
 
-    });
+  ngOnDestroy() { 
+    this.subs.unsubscribe(); 
   }
 
   save() {
+    console.log('save');
     this.error = '';
     this.saving = true;
     this.optionsService.set(this.options).pipe(

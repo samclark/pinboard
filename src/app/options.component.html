@@ -9,7 +9,7 @@
             <div class="form-group">
                 <div class="limited-width-controls">
                     <label class="sr-only" for="authToken">API Token</label>
-                    <input id="authToken" type="text" class="form-control" size="40" placeholder="username:ABCDEFGHIJ0123456789" [(ngModel)]="options.authToken"/>
+                    <input id="authToken" type="text" class="form-control" size="40" placeholder="username:ABCDEFGHIJ0123456789" [(ngModel)]="options.authToken" (ngModelChange)="onChange.next()"/>
                 </div>
                 <small class="form-text text-muted">You can find your API token on your <a href="https://pinboard.in/settings/password" target="_blank">pinboard settings</a> page.</small>
             </div>
@@ -19,12 +19,12 @@
             <div class="form-group">
                 <div class="form-check">
                     <label class="form-check-label" for="saveBookmarksInNewWindow">
-                        <input class="form-check-input" id="saveBookmarksInNewWindow" type="checkbox" [(ngModel)]="options.saveBookmarksInNewWindow"/><span>Save bookmarks in a new window</span>
+                        <input class="form-check-input" id="saveBookmarksInNewWindow" type="checkbox" [(ngModel)]="options.saveBookmarksInNewWindow"  (ngModelChange)="onChange.next()"/><span>Save bookmarks in a new window</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label" for="showDesktopNotifications">
-                        <input class="form-check-input" id="showDesktopNotifications" type="checkbox" [(ngModel)]="options.showDesktopNotifications"/><span>Show desktop notifications</span>
+                        <input class="form-check-input" id="showDesktopNotifications" type="checkbox" [(ngModel)]="options.showDesktopNotifications" (ngModelChange)="onChange.next()"/><span>Show desktop notifications</span>
                     </label>
                 </div>
             </div>
@@ -33,7 +33,7 @@
             <h4>Appearance</h4>
             <div class="form-group">
                 <div class="limited-width-controls">
-                    <select class="form-control custom" [(ngModel)]="options.theme">
+                    <select class="form-control custom" [(ngModel)]="options.theme" (ngModelChange)="onChange.next()">
                         <option *ngFor="let theme of themes" [value]="theme"><span [app-i18n]="'T_' + theme">{{theme}}</span></option>
                     </select>
                 </div>
@@ -45,11 +45,11 @@
             <div class="form-group">
                 <p class="form-text"><span>Drag and drop the menu items to order them.</span></p>
                 <div class="limited-width-controls">
-                    <ul class="list-group" [dragula]='"bag-one"' [dragulaModel]='options.menuItems'>
+                    <ul class="list-group" [dragula]='"menu"' [(dragulaModel)]='options.menuItems'>
                         <li class="list-group-item list-group-item-action menu-item" *ngFor="let menuItem of options.menuItems">
                             <div class="form-check">
                                 <label class="form-check-label" [for]="menuItem.key">
-                                    <input class="form-check-input" type="checkbox" [(ngModel)]="menuItem.enabled" [id]="menuItem.key" /><span [app-i18n]="'MI_' + menuItem.key">{{menuItem.key}}</span>
+                                    <input class="form-check-input" type="checkbox" [(ngModel)]="menuItem.enabled" [id]="menuItem.key" (ngModelChange)="onChange.next()"/><span [app-i18n]="'MI_' + menuItem.key">{{menuItem.key}}</span>
                                 </label>
                             </div>
                         </li>
@@ -61,13 +61,12 @@
             <h4>Privacy</h4>
             <div class="form-group">
                 <div class="limited-width-controls">
-                    <select class="form-control custom" [(ngModel)]="options.privacyOverride">
+                    <select class="form-control custom" [(ngModel)]="options.privacyOverride" (ngModelChange)="onChange.next()">
                         <option *ngFor="let privacyOverride of privacyOverrides" [value]="privacyOverride"><span [app-i18n]="'PO_' + privacyOverride">{{privacyOverride}}</span></option>
                     </select>
                 </div>
                 <small class="form-text text-muted"><span>Set the privacy of saved bookmarks. Default is 'Public' unless you have enabled the 'save all bookmarks as private' user setting in your pinboard account, in which case default is 'private'.</span></small>
             </div>
         </section>
-        <button type="submit" class="btn btn-primary" (click)="save()">Save</button>
     </div>
 </div>
