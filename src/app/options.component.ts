@@ -1,3 +1,5 @@
+
+import {mergeMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 
@@ -45,8 +47,8 @@ export class OptionsComponent implements OnInit {
   save() {
     this.error = '';
     this.saving = true;
-    this.optionsService.set(this.options)
-      .flatMap(() => this.iconService.set())
+    this.optionsService.set(this.options).pipe(
+      mergeMap(() => this.iconService.set()))
       .subscribe(null, error => {
         this.error = error.message || 'Unknown error.';
       });

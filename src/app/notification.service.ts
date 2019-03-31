@@ -1,7 +1,10 @@
+
+import {from as observableFrom,  Observable } from 'rxjs';
+
+import {mergeMap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/mergeMap';
+
+
 
 import { OptionsService } from './options.service';
 
@@ -11,27 +14,27 @@ export class NotificationService {
   constructor(private optionsService: OptionsService) { }
 
   message(title: string, message: string): Observable<string> {
-    return this.optionsService.get().flatMap(options => {
+    return this.optionsService.get().pipe(mergeMap(options => {
       let notification: browser.notifications.NotificationOptions = {
         type: "basic",
         iconUrl: browser.extension.getURL("images/icon-128.png"),
         title: title,
         message: message
       };
-      return Observable.fromPromise(browser.notifications.create(undefined, notification));
-    });
+      return observableFrom(browser.notifications.create(undefined, notification));
+    }));
   }
 
   error(message: string): Observable<string> {
-    return this.optionsService.get().flatMap(options => {
+    return this.optionsService.get().pipe(mergeMap(options => {
       let notification: browser.notifications.NotificationOptions = {
         type: "basic",
         iconUrl: browser.extension.getURL("images/error-128.png"),
         title: chrome.i18n.getMessage('NT_ERROR'),
         message: message
       };
-      return Observable.fromPromise(browser.notifications.create(undefined, notification));
-    });
+      return observableFrom(browser.notifications.create(undefined, notification));
+    }));
   }
   
 }

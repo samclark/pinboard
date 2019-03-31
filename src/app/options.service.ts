@@ -1,7 +1,8 @@
+
+import {from as observableFrom,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/map';
+
+
 
 import { Options } from './options'
 
@@ -9,7 +10,7 @@ import { Options } from './options'
 export class OptionsService {
 
   get(): Observable<Options> {
-    return Observable.fromPromise(browser.storage.local.get({
+    return observableFrom(browser.storage.local.get({
       authToken: '',
       theme: 'LIGHT',
       saveBookmarksInNewWindow: true,
@@ -40,6 +41,6 @@ export class OptionsService {
       privacyOverride: options.privacyOverride,
       menuItems: options.menuItems
     };
-    return Observable.fromPromise(browser.storage.local.set(values));
+    return observableFrom(browser.storage.local.set(values));
   }
 }
