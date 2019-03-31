@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import fontawesome from '@fortawesome/fontawesome';
 import * as faStar from '@fortawesome/fontawesome-free-solid/faStar';
-import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/mergeMap';
 
 import { OptionsService } from './options.service';
-import { Post } from './post'
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 @Component({
   selector: 'app-popup',
@@ -21,6 +18,7 @@ export class PopupComponent implements OnInit {
   theme: string = '';
   user: string = '';
   menuItems: any[];
+  saveBookmarksInNewWindow: boolean;
 
   ngOnInit() {
     fontawesome.library.add(faStar);
@@ -30,6 +28,7 @@ export class PopupComponent implements OnInit {
       this.menuItems = this.user
         ? options.menuItems.filter(mi => mi.enabled)
         : [{ key: 'SETUP', enabled: true }];
+      this.saveBookmarksInNewWindow = options.saveBookmarksInNewWindow;
     }, error => {
       this.error = error.message || 'Unknown error.';
     });
@@ -83,31 +82,38 @@ export class PopupComponent implements OnInit {
     browser.tabs.query({ currentWindow: true, active: true })
       .then(tabs =>       
         browser.tabs.executeScript(tabs[0].id, { code: "window.getSelection().toString().trim();" })
-        .then(data => data.length > 0 && data[0] ? data[0] : null, _ => null)
-        .then(selected => selected
-          ? `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}&description=${selected}`
-          : `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}`)
-        .then(url => browser.windows.create({
-          height: 550,
-          width: 700,
-          state: 'normal',
-          type: 'panel',
-          url: url.substr(0, 2000)
-        }))
-      )
-      .then(this.closePopups);
+        .then(data => data.length > 0 && data[0] ? `&description=${data[0]}` : null, _ => null)
+        .then(query => `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}${query}`.substr(0, 2000))
+        .then(url => {
+          if (this.saveBookmarksInNewWindow) {
+            browser.windows.create({
+              height: 550,
+              width: 700,
+              state: 'normal',
+              type: 'panel',
+              url: url
+            });
+          } else {
+            browser.tabs.create({ 
+              url: url 
+            });
+          }
+          this.closePopups();
+        })
+      );
   }
 
   private readLater() {
     browser.tabs.query({ currentWindow: true, active: true })
       .then(tabs => {
-        if (tabs.length != 1)
+        if (tabs.length != 1) {
           throw new Error('Can not query current tab.');
-        let post = new Post();
-        post.url = tabs[0].url;
-        post.description = tabs[0].title;
-        post.toRead = true;
-        browser.runtime.sendMessage(post);
+        }
+        browser.runtime.sendMessage({
+          url: tabs[0].url,
+          description: tabs[0].title,
+          toRead: true         
+        });
       })
       .then(this.closePopups);
   }
@@ -117,7 +123,7 @@ export class PopupComponent implements OnInit {
       browser.runtime.openOptionsPage()
         .then(this.closePopups);
     } else {
-      browser.tabs.create({ url: browser.extension.getURL('index.html#/options') })
+      browser.tabs.create({url: browser.extension.getURL('index.html#/options')})
         .then(this.closePopups);
     }
   }

@@ -30,17 +30,6 @@
             </div>
         </section>
         <section>
-            <h4>Privacy</h4>
-            <div class="form-group">
-                <div class="limited-width-controls">
-                    <select class="form-control custom" [(ngModel)]="options.privacyOverride">
-                        <option *ngFor="let privacyOverride of privacyOverrides" [value]="privacyOverride"><span [app-i18n]="'PO_' + privacyOverride">{{privacyOverride}}</span></option>
-                    </select>
-                </div>
-                <small class="form-text text-muted"><span>Set the privacy of saved bookmarks. Default is 'Public' unless you have enabled the 'save all bookmarks as private' user setting in your pinboard account, in which case default is 'private'.</span></small>
-            </div>
-        </section>
-        <section>
             <h4>Appearance</h4>
             <div class="form-group">
                 <div class="limited-width-controls">
@@ -66,6 +55,17 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        </section>
+        <section>
+            <h4>Privacy</h4>
+            <div class="form-group">
+                <div class="limited-width-controls">
+                    <select class="form-control custom" [(ngModel)]="options.privacyOverride">
+                        <option *ngFor="let privacyOverride of privacyOverrides" [value]="privacyOverride"><span [app-i18n]="'PO_' + privacyOverride">{{privacyOverride}}</span></option>
+                    </select>
+                </div>
+                <small class="form-text text-muted"><span>Set the privacy of saved bookmarks. Default is 'Public' unless you have enabled the 'save all bookmarks as private' user setting in your pinboard account, in which case default is 'private'.</span></small>
             </div>
         </section>
         <button type="submit" class="btn btn-primary" (click)="save()">Save</button>

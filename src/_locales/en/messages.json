@@ -82,5 +82,21 @@
   "T_DARK": {
     "message": "Dark",
     "description": "The 'dark' extension theme"
+  },
+  "NT_ERROR": {
+    "message": "Error",
+    "description": "The 'error' notification title"
+  },
+  "NT_SAVE": {
+    "message": "Save",
+    "description": "The 'save' notification title"
+  },
+  "NM_UNKNOWN_ERROR": {
+    "message": "Save",
+    "description": "The 'unknown error' notification message"
+  },
+  "BP_TITLE": {
+    "message": "Pinboard Background Page",
+    "description": "The background page title"
   }
 }
