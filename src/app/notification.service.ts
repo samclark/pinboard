@@ -27,7 +27,7 @@ export class NotificationService {
       let notification: browser.notifications.NotificationOptions = {
         type: "basic",
         iconUrl: browser.extension.getURL("images/error-128.png"),
-        title: 'Error',
+        title: chrome.i18n.getMessage('NT_ERROR'),
         message: message
       };
       return Observable.fromPromise(browser.notifications.create(undefined, notification));
