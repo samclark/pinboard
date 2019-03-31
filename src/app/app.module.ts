@@ -33,7 +33,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    DragulaModule,
+    DragulaModule.forRoot(),
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { useHash: true })
