@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, OnInit, Renderer } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, Renderer } from '@angular/core';
 
 @Directive({
   selector: '[app-i18n]'

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
-import { OptionsService } from './options.service';
-import { PinboardService } from './pinboard.service';
 import { IconService } from './icon.service';
 import { NotificationService } from './notification.service'
+import { OptionsService } from './options.service';
+import { PinboardService } from './pinboard.service';
 import { Post } from './post'
 
 @Component({

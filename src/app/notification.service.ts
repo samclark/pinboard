@@ -1,10 +1,6 @@
-
-import {from as observableFrom,  Observable } from 'rxjs';
-
-import {mergeMap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-
-
+import { from as observableFrom,  Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 import { OptionsService } from './options.service';
 

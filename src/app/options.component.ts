@@ -1,12 +1,11 @@
-
-import {mergeMap, debounce} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
+import { Subject, Subscription, timer } from 'rxjs';
+import { debounce, mergeMap } from 'rxjs/operators';
 import { DragulaService } from 'ng2-dragula';
 
-import { Options } from './options'
 import { IconService } from './icon.service';
 import { OptionsService } from './options.service';
-import { Subscription, timer, Observable, Subject } from 'rxjs';
+import { Options } from './options'
 
 @Component({
   selector: 'app-options',
@@ -19,10 +18,9 @@ export class OptionsComponent implements OnInit {
     private iconService: IconService, 
     private optionsService: OptionsService) { }
   
-  onChange: Subject<void> = new Subject<void>();
   subs: Subscription = new Subscription();
+  onChange: Subject<void> = new Subject<void>();
   loaded: boolean = false;
-  saving: boolean = false;
   error: string = '';
   options: Options;
   themes = [
@@ -49,22 +47,17 @@ export class OptionsComponent implements OnInit {
     );
     this.onChange
       .pipe(debounce(() => timer(250)))
-      .subscribe(() => this.save());
+      .subscribe(() => {
+        this.error = '';
+        this.optionsService.set(this.options).pipe(
+          mergeMap(() => this.iconService.set()))
+          .subscribe(null, error => {
+            this.error = error.message || 'Unknown error.';
+          });
+      });
   }
 
   ngOnDestroy() { 
     this.subs.unsubscribe(); 
-  }
-
-  save() {
-    console.log('save');
-    this.error = '';
-    this.saving = true;
-    this.optionsService.set(this.options).pipe(
-      mergeMap(() => this.iconService.set()))
-      .subscribe(null, error => {
-        this.error = error.message || 'Unknown error.';
-      });
-    this.saving = false;
   }
 }

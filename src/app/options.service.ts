@@ -1,8 +1,5 @@
-
-import {from as observableFrom,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-
-
+import { from as observableFrom, Observable } from 'rxjs';
 
 import { Options } from './options'
 

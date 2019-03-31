@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import fontawesome from '@fortawesome/fontawesome';
 import * as faStar from '@fortawesome/fontawesome-free-solid/faStar';
 
-
 import { OptionsService } from './options.service';
 
 @Component({
