@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import fontawesome from '@fortawesome/fontawesome';
 import * as faStar from '@fortawesome/fontawesome-free-solid/faStar';
-import 'rxjs/add/operator/mergeMap';
+
 
 import { OptionsService } from './options.service';
 

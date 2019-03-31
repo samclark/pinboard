@@ -1,7 +1,10 @@
+
+import {from as observableFrom,  Observable } from 'rxjs';
+
+import {mergeMap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/mergeMap';
+
+
 
 import { OptionsService } from './options.service';
 
@@ -11,8 +14,8 @@ export class IconService {
   constructor(private optionsService: OptionsService) { }
 
   set(): Observable<void> {
-    return this.optionsService.get().flatMap(options => 
-      Observable.fromPromise(browser.browserAction.setIcon({
+    return this.optionsService.get().pipe(mergeMap(options => 
+      observableFrom(browser.browserAction.setIcon({
         path: options.theme == "DARK"  
           ? {
             "19": "images/action-dark-19.png", 
@@ -22,6 +25,6 @@ export class IconService {
             "38": "images/action-38.png"
           }
       }))
-    );
+    ));
   }
 }
