@@ -1,5 +1,5 @@
         
-div.popup {
+.popup {
     margin: 0;
     padding: 6px;
     color: #666;
@@ -7,7 +7,7 @@ div.popup {
     -webkit-user-select: none;
 }
 
-div.popup[theme=DARK] {
+.popup[theme=DARK] {
     color: #D7D7D8;
     background-color: #292A2D;
     border-top-color: black;
@@ -15,7 +15,7 @@ div.popup[theme=DARK] {
     border-top-style: solid;
 }
 
-div.list-group {
+.list-group {
     margin-bottom: 0;
     user-select: none;
     -webkit-user-select: none;
@@ -23,7 +23,7 @@ div.list-group {
     cursor: pointer;
 }
 
-a.list-group-item {
+.list-group-item {
     padding: 6px 10px;
     color: #666;
     user-select: none;
@@ -31,27 +31,27 @@ a.list-group-item {
     font-size: small;
 }
 
-a.list-group-item[theme=DARK] {
+.list-group-item[theme=DARK] {
     color: #D7D7D8;
     background-color: #292A2D;
 }
 
-a.list-group-item:hover,
-a.list-group-item:hover i {
+.list-group-item:hover,
+.list-group-item:hover .list-group-item-icon {
     color: #11A;
     user-select: none;
     -webkit-user-select: none;
 }
 
-a.list-group-item[theme=DARK]:hover,
-a.list-group-item[theme=DARK]:hover i {
+.list-group-item[theme=DARK]:hover,
+.list-group-item[theme=DARK]:hover .list-group-item-icon {
     color: #D7D7D8;
     background-color: #444547;
 }
 
-a.list-group-item i {
+.list-group-item-icon {
     margin-left: -2px;
-    margin-right: 2px;
+    margin-right: 4px;
     color: #AAA;
     user-select: none;
     -webkit-user-select: none;
