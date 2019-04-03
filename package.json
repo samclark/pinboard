@@ -31,7 +31,7 @@
     "core-js": "^3.0.0",
     "ng2-dragula": "^2.1.1",
     "rxjs": "^6.4.0",
-    "tslib": "^1.9.0",
+    "tslib": "^1.9.3",
     "webextension-polyfill": "^0.4.0",
     "zone.js": "^0.8.29",
     "rxjs-compat": "^6.0.0-rc.0"

@@ -81,7 +81,7 @@ export class PopupComponent implements OnInit {
     browser.tabs.query({ currentWindow: true, active: true })
       .then(tabs =>       
         browser.tabs.executeScript(tabs[0].id, { code: "window.getSelection().toString().trim();" })
-        .then(data => data.length > 0 && data[0] ? `&description=${data[0]}` : null, _ => null)
+        .then(data => data.length > 0 && data[0] ? `&description=${data[0]}` : '', _ => '')
         .then(query => `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}${query}`.substr(0, 2000))
         .then(url => {
           if (this.saveBookmarksInNewWindow) {
