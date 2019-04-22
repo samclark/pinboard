@@ -13,16 +13,15 @@
   },  
   "options_ui": {
     "page": "/index.html#/options",
-    "chrome_style": false,
-    "open_in_tab": true
+    "chrome_style": false
   },
   "background": {
     "page": "/index.html#/background"
   },
   "browser_action": {
     "default_icon": {
-      "19": "images/action-19.png",
-      "38": "images/action-38.png"
+      "19": "images/action-light-19.png",
+      "38": "images/action-light-38.png"
     },
     "default_title": "__MSG_browserActionTitle__",
     "default_popup": "/index.html#/popup"
@@ -33,5 +32,27 @@
     "storage",
     "tabs",
     "*://*/*"
-  ]
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      }
+    },
+    "read-later": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "__MSG_MI_READ_LATER__"
+    },
+    "save-bookmark": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "__MSG_MI_SAVE_BOOKMARK__"
+    }
+  }
 }

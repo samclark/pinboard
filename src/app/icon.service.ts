@@ -17,8 +17,8 @@ export class IconService {
             "19": "images/action-dark-19.png", 
             "38": "images/action-dark-38.png"
           } : {
-            "19": "images/action-19.png", 
-            "38": "images/action-38.png"
+            "19": "images/action-light-19.png", 
+            "38": "images/action-light-38.png"
           }
       }))
     ));

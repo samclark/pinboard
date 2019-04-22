@@ -1,5 +1,5 @@
 
-export class Options {
+export interface Options {
     authToken: string;
     theme: string;
     saveBookmarksInNewWindow: boolean;

@@ -16,16 +16,16 @@ export class PinboardService {
       .set('format', 'json')
       .set('url', post.url)
       .set('description', post.description);
-    if (typeof post.extended !== 'undefined') {
+    if (post.extended) {
       params = params.append('extended', post.extended);
     }
-    if (typeof post.tags !== 'undefined') {
+    if (post.tags) {
       params = params.append('tags', post.tags);
     }
-    if (typeof post.shared !== 'undefined') {
+    if (post.shared) {
       params = params.append('shared', post.shared ? 'yes' : 'no');
     }
-    if (typeof post.toRead !== 'undefined') {
+    if (post.toRead) {
       params = params.append('toread', post.toRead ? 'yes' : 'no');
     }
     return this.httpClient

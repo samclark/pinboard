@@ -73,48 +73,22 @@ export class PopupComponent implements OnInit {
   }
 
   private openUrl(url: string) {
-    browser.tabs.create({ url })
+    return browser.tabs.create({ url })
       .then(this.closePopups);
   }
 
   private saveBookmark() {
-    browser.tabs.query({ currentWindow: true, active: true })
-      .then(tabs =>       
-        browser.tabs.executeScript(tabs[0].id, { code: "window.getSelection().toString().trim();" })
-        .then(data => data.length > 0 && data[0] ? `&description=${data[0]}` : '', _ => '')
-        .then(query => `https://pinboard.in/add?jump=close&url=${encodeURIComponent(tabs[0].url)}&title=${encodeURIComponent(tabs[0].title)}${query}`.substr(0, 2000))
-        .then(url => {
-          if (this.saveBookmarksInNewWindow) {
-            browser.windows.create({
-              height: 550,
-              width: 700,
-              state: 'normal',
-              type: 'panel',
-              url: url
-            });
-          } else {
-            browser.tabs.create({ 
-              url: url 
-            });
-          }
-          this.closePopups();
-        })
-      );
+    return browser.runtime.sendMessage({
+      command: 'save-bookmark'
+    })
+    .then(this.closePopups);
   }
 
   private readLater() {
-    browser.tabs.query({ currentWindow: true, active: true })
-      .then(tabs => {
-        if (tabs.length != 1) {
-          throw new Error('Can not query current tab.');
-        }
-        browser.runtime.sendMessage({
-          url: tabs[0].url,
-          description: tabs[0].title,
-          toRead: true         
-        });
-      })
-      .then(this.closePopups);
+    return browser.runtime.sendMessage({
+      command: 'read-later'
+    })
+    .then(this.closePopups);
   }
 
   private openOptions() {
@@ -126,7 +100,7 @@ export class PopupComponent implements OnInit {
         .then(this.closePopups);
     }
   }
-
+  
   private closePopups() {
     let popups = browser.extension.getViews({ type: 'popup' });
     popups.forEach(popup => popup.close());

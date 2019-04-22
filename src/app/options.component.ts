@@ -60,4 +60,9 @@ export class OptionsComponent implements OnInit {
   ngOnDestroy() { 
     this.subs.unsubscribe(); 
   }
+
+  openKeyboardShortcuts() {
+    browser.tabs.create({url: browser.extension.getURL('chrome://extensions/shortcuts')});
+    return false;
+  }
 }

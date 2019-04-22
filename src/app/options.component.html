@@ -37,7 +37,6 @@
                         <option *ngFor="let theme of themes" [value]="theme"><span [app-i18n]="'T_' + theme">{{theme}}</span></option>
                     </select>
                 </div>
-                <small class="form-text text-muted"><span>Set the extension theme.</span></small>
             </div>
         </section>
         <section>
@@ -66,6 +65,12 @@
                     </select>
                 </div>
                 <small class="form-text text-muted"><span>Set the privacy of saved bookmarks. Default is 'Public' unless you have enabled the 'save all bookmarks as private' user setting in your pinboard account, in which case default is 'private'.</span></small>
+            </div>
+        </section>
+        <section>
+            <h4>Keyboard Shortcuts</h4>
+            <div class="form-group">
+                <span class="form-text">Keyboard shortcuts for all extension actions can be set in the <a href="#" (click)="openKeyboardShortcuts()">browser options page</a>.</span>
             </div>
         </section>
     </div>
